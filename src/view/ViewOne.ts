@@ -12,10 +12,6 @@ export class ViewOne extends BaseView {
 	lightPoint: PointLight;
 	lightAmbient: AmbientLight;
 	lightPoint2: PointLight;
-	colorPalette = [0xffd700, 0xfafad2, 0xc0c0c0,0xffd700, 0xfaf0be, 0xeae0c8, 0xffd700, 0xf2f3f4, 0xf7e98e,0xc4aead, 0xf8de7e];
-	starsizes = [1, .7, 1, .5, .6, 1];
-	sizeInd = 0; 
-	colorInd = 0;
 	outsideE!: Mesh;
 
 
@@ -46,14 +42,17 @@ export class ViewOne extends BaseView {
 		this.scene.add(this.lightAmbient);
 		this.loadingObjects();
 		console.log(this.stars.length);
-		
-		for (let i = 0; i < 25; i++) {
-			if (this.sizeInd>this.starsizes.length-1){this.sizeInd = 0};
-			if (this.colorInd>this.colorPalette.length-1){this.colorInd = 0};
+		let firstC = [];
+		let secondC = [];
+		let thirdC = [];
+		let fourC = [];
+		let fifthC = [];
 
+		for (let i = 0; i < 25; i++) {
 			var octa = new OctahedronGeometry(2);
 			var material = new MeshPhongMaterial( {color:0xFFD700, shininess: 100});
 			var star = new Mesh( octa, material );
+			secondC.push(star);
 			this.tl.to(
 				star.position, 
 					{ 
@@ -67,6 +66,7 @@ export class ViewOne extends BaseView {
 			var dode = new DodecahedronGeometry(3);
 			var material = new MeshPhongMaterial( {color:0xfafad2, shininess: 100});
 			var star2 = new Mesh( dode, material );
+			thirdC.push(star2);
 			this.tl.to(
 				star2.position, 
 					{ 
@@ -79,11 +79,12 @@ export class ViewOne extends BaseView {
 			var dode = new DodecahedronGeometry(1);			
 			var material = new MeshPhongMaterial( {color:0xfafad2, shininess: 100});
 			var star5 = new Mesh( dode, material );
+			firstC.push(star5);
 			this.tl.to(
 				star5.position, 
 					{ 
-						x: Math.cos((i / 20) * Math.PI * 2) * 10,
-						y: Math.sin((i / 20) * Math.PI * 2) * 10,
+						x: Math.cos((i / 25) * Math.PI * 2) * 10,
+						y: Math.sin((i / 25) * Math.PI * 2) * 10,
 						duration: 2,
 						ease: "bounce.out",
 						yoyo:true
@@ -91,6 +92,7 @@ export class ViewOne extends BaseView {
 			var octa = new OctahedronGeometry(4);
 			var material = new MeshPhongMaterial( {color:0xFFD700, shininess: 100});
 			var star3 = new Mesh( octa, material );
+			fourC.push(star3);
 			this.tl.to(
 				star3.position, 
 					{ 
@@ -103,18 +105,17 @@ export class ViewOne extends BaseView {
 			var  dode = new DodecahedronGeometry(5);	
 			var material = new MeshPhongMaterial( {color:0xfafad2, shininess: 100});
 			var star4 = new Mesh( dode, material );
+			fifthC.push(star4);
 			this.tl.to(
 				star4.position, 
 					{ 
-						x: Math.cos((i / 20) * Math.PI *2) * 50,
-						y: Math.sin((i / 20) * Math.PI *2) * 50,
+						x: Math.cos((i / 25) * Math.PI *2) * 50,
+						y: Math.sin((i / 25) * Math.PI *2) * 50,
 						duration: 2,
 						ease: "bounce.out",
 						yoyo:true
 					}, `${i/4}`);
 										
-			this.colorInd ++;
-			this.sizeInd ++;
 			this.scene.add(star,star2,star3,star4,star5);
 			this.stars.push(star,star2,star3,star4,star5);
 		}
@@ -136,14 +137,17 @@ export class ViewOne extends BaseView {
 				this.tl.to(star.position,{
 					x: 100,
 					y: -100,
-					duration: .3,
-					stagger:.1
+					duration: .1,
+					stagger: .3,
+					ease:"back.in"
+
 				})
 				this.tl.to(star.position,{
 					x: -100,
 					y: 100,
-					duration: .3,
-					stagger:.1
+					duration: .1,
+					stagger:.3,
+					ease:"back.in"
 				})
 				this.tl.to( star.position , 
 					{
@@ -155,22 +159,107 @@ export class ViewOne extends BaseView {
 				this.tl.to(star.position,{
 					x: -100,
 					y: 100,
-					duration: .3,
-					stagger:.1
+					duration: .1,
+					stagger:.1,
+					ease:"back.in"
 				})
 				this.tl.to(star.position,{
 					x: 100,
 					y: -100,
-					duration: .3,
-					stagger:.1
+					duration: .1,
+					stagger: .1,
+					ease:"back.in"
 				})
 				this.tl.to( star.position , 
 					{
+					// https://greensock.com/forums/topic/16123-can-i-animate-multiple-objects-towards-a-point/
 					x: Math.random() * (60 - (-60)) + -60,
 					y: Math.random() * (50 - (-50)) + -50,
 					})
 			}
 			i++;
+		});
+		firstC.forEach((star:Mesh, i: number)=>{
+			this.tl.to(star.scale,{
+				x: 5, 
+				y: 5, 
+				duration: .1, 
+				stagger:.3,
+				ease: "expo.out"
+			})
+			this.tl.to(star.position, {
+				x: Math.cos((i / 25) * Math.PI * 2) * 10,
+				y: Math.sin((i / 25) * Math.PI * 2) * 10,
+			})
+			i++;
+
+		})
+		secondC.forEach((star:Mesh, i: number)=>{
+			this.tl.to(star.scale,{
+				x: 5, 
+				y: 5, 
+				duration: .1, 
+				stagger:.3,
+				ease: "expo.out"
+			})
+			this.tl.to(star.position, {
+				x: Math.cos((i / 25) * Math.PI * 2) * 20,
+				y: Math.sin((i / 25) * Math.PI * 2) * 20,
+			})
+			i++;
+
+		})
+		thirdC.forEach((star:Mesh, i: number)=>{
+			this.tl.to(star.scale,{
+				x: 3, 
+				y: 3, 
+				duration: .1, 
+				stagger:.3,
+				ease: "expo.out"
+			})
+			this.tl.to(star.position, {
+				x: Math.cos((i / 25) * Math.PI * 2) * 30,
+				y: Math.sin((i / 25) * Math.PI * 2) * 30,
+			})
+			i++;
+
+		})
+		fourC.forEach((star:Mesh, i: number)=>{
+			this.tl.to(star.scale,{
+				x: 3, 
+				y: 3, 
+				duration: .1, 
+				stagger:.3,
+				ease: "expo.out"
+			})
+			this.tl.to(star.position, {
+				x: Math.cos((i / 25) * Math.PI * 2) * 40,
+				y: Math.sin((i / 25) * Math.PI * 2) * 40,
+			})
+			i++;
+
+		})
+		fifthC.forEach((star:Mesh, i: number)=>{
+			this.tl.to(star.scale,{
+				x: 3, 
+				y: 3, 
+				duration: .1, 
+				stagger:.3,
+				ease: "expo.out"
+			})
+			this.tl.to(star.position, {
+				x: Math.cos((i / 25) * Math.PI * 2) * 50,
+				y: Math.sin((i / 25) * Math.PI * 2) * 50,
+			})
+			i++;
+
+		})
+		this.stars.forEach((star:Mesh)=>{
+			this.tl.to(star.scale, {
+				x:0,
+				y:0,
+				duration:.2,
+			})
 		})
 
 		console.log(this.stars.length);
@@ -209,14 +298,15 @@ export class ViewOne extends BaseView {
 	}
 
 	// https://stackoverflow.com/questions/51776220/animate-an-fbx-loaded-object-in-three-js
-	animate() {
-		requestAnimationFrame( this.animate );
-		// You have access to scene - Get 'new_fbx' object from it
-		var fbxObject = this.scene.getObjectByName('paloma');
-		// Make sure this object exists before accessing it
-		if (fbxObject) {
-		   fbxObject .rotation.x += 0.01;
-		}
-		this.renderer.render( this.scene, this.camera );
-	}
+	// didnt work
+	// animate() {
+	// 	requestAnimationFrame( this.animate );
+	// 	// You have access to scene - Get 'new_fbx' object from it
+	// 	var fbxObject = this.scene.getObjectByName('paloma');
+	// 	// Make sure this object exists before accessing it
+	// 	if (fbxObject) {
+	// 	   fbxObject .rotation.x += 0.01;
+	// 	}
+	// 	this.renderer.render( this.scene, this.camera );
+	// }
 }
