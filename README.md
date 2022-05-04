@@ -1,5 +1,7 @@
 # final-project
 
+slides :https://docs.google.com/presentation/d/1QfAZYi_zp69xgiz1m62_lFpdFii5kB3hIwC0UIY-Wzk/edit?usp=sharing
+
 For my final project I want to expand the still life assigment. I want to animate each planet and my model to do a bunch of tricks. 
 I made a canva presentation to show some of the animations i want to do. 
 https://www.canva.com/design/DAE-LV94Q5c/lF0gALzqRyXEX2oe46T1dw/view?utm_content=DAE-LV94Q5c&utm_campaign=designshare&utm_medium=link&utm_source=publishsharelink
