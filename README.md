@@ -7,4 +7,7 @@ https://www.canva.com/design/DAE-LV94Q5c/lF0gALzqRyXEX2oe46T1dw/view?utm_content
 Some of the challenges i expect to face with this project, will definely be animating the planets, and figuring out the right rhythm for my piece. 
 I also think it managing the timeline will be challenging as well. 
 
+Update: 
+I am pivoting away from the initial concept of my final project, 
+I created an array of the planet meshes, and unfortunately, every time i try to animate the planets using GSAP i get a series of errors in the console. 
 
